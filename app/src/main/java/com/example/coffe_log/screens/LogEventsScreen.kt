@@ -48,11 +48,18 @@ import com.example.coffe_log.components.BarBottom
 //    }
 //}
 @Composable
-fun LogEventsScreen() {
+fun LogEventsScreen(
+    onLog: () -> Unit,
+    count: Int,
+    ccount: Int,
+    modifier: Modifier = Modifier
+) {
     Column {
         Text(text = "LogEventsScreen")
+        Text(text = "Count: $count")
+        Text(text = "ccviewmodel: $ccount")
         Button(
-            onClick = {}
+            onClick = onLog
         ) {
             Text(text = "Log Events")
         }

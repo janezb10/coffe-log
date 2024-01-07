@@ -5,7 +5,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,6 +20,7 @@ import com.example.coffe_log.screens.MotivationMessagesScreen
 import com.example.coffe_log.screens.SettingsScreen
 import com.example.coffe_log.screens.SettingsScreen
 import com.example.coffe_log.screens.StartScreen
+import com.example.coffe_log.ui.theme.CoffeViewModel
 
 enum class CoffeLogScreen {
     Start,
@@ -30,6 +34,9 @@ enum class CoffeLogScreen {
 fun CoffeLogApp(
     modifier: Modifier = Modifier
 ) {
+    var count = rememberSaveable{ mutableStateOf(0) }
+    val viewModel: CoffeViewModel = viewModel()
+
     val navController = rememberNavController()
 
     NavHost(
@@ -58,7 +65,15 @@ fun CoffeLogApp(
                     navController.navigate(CoffeLogScreen.Settings.name)
                 },
                 content = {
-                    LogEventsScreen()
+                    LogEventsScreen(
+                        onLog = {
+                            count.value = count.value + 1
+                            viewModel.onLog()
+                        },
+                        count = count.value,
+                        ccount = viewModel.countNumber()
+//                        ccount = viewModel.uiState.value.count
+                    )
                 }
             )
         }
