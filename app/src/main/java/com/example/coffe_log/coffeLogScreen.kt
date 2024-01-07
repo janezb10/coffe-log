@@ -1,9 +1,16 @@
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.coffe_log.components.BarBottom
 import com.example.coffe_log.screens.DisplayDataScreen
 import com.example.coffe_log.screens.LogEventsScreen
 import com.example.coffe_log.screens.MotivationMessagesScreen
@@ -37,7 +44,7 @@ fun CoffeLogApp(
             )
         }
         composable(CoffeLogScreen.LogEvents.name) {
-            LogEventsScreen(
+            Screenn(
                 onAClicked = {
                     navController.navigate(CoffeLogScreen.LogEvents.name)
                 },
@@ -49,11 +56,14 @@ fun CoffeLogApp(
                 },
                 onDClicked = {
                     navController.navigate(CoffeLogScreen.Settings.name)
+                },
+                content = {
+                    LogEventsScreen()
                 }
             )
         }
         composable(CoffeLogScreen.DisplayData.name) {
-            DisplayDataScreen(
+            Screenn(
                 onAClicked = {
                     navController.navigate(CoffeLogScreen.LogEvents.name)
                 },
@@ -66,13 +76,13 @@ fun CoffeLogApp(
                 onDClicked = {
                     navController.navigate(CoffeLogScreen.Settings.name)
                 },
-                onLogoutClicked = {
-                    navController.navigate(CoffeLogScreen.Start.name)
+                content = {
+                    DisplayDataScreen()
                 }
             )
         }
         composable(CoffeLogScreen.MotivationMessages.name) {
-            MotivationMessagesScreen(
+            Screenn(
                 onAClicked = {
                     navController.navigate(CoffeLogScreen.LogEvents.name)
                 },
@@ -85,13 +95,13 @@ fun CoffeLogApp(
                 onDClicked = {
                     navController.navigate(CoffeLogScreen.Settings.name)
                 },
-                onLogoutClicked = {
-                    navController.navigate(CoffeLogScreen.Start.name)
+                content = {
+                    MotivationMessagesScreen()
                 }
             )
         }
         composable(CoffeLogScreen.Settings.name) {
-            SettingsScreen(
+            Screenn(
                 onAClicked = {
                     navController.navigate(CoffeLogScreen.LogEvents.name)
                 },
@@ -104,10 +114,39 @@ fun CoffeLogApp(
                 onDClicked = {
                     navController.navigate(CoffeLogScreen.Settings.name)
                 },
-                onLogoutClicked = {
-                    navController.navigate(CoffeLogScreen.Start.name)
+                content = {
+                    SettingsScreen()
                 }
             )
+        }
+    }
+}
+
+@Composable
+fun Screenn(
+    onAClicked: () -> Unit,
+    onBClicked: () -> Unit,
+    onCClicked: () -> Unit,
+    onDClicked: () -> Unit,
+    content: @Composable () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Scaffold(
+        bottomBar = {
+            BarBottom(
+                onAClicked = onAClicked,
+                onBClicked = onBClicked,
+                onCClicked = onCClicked,
+                onDClicked = onDClicked
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+            content()
         }
     }
 }

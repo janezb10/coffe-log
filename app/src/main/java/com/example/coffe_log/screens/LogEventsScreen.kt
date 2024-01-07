@@ -12,38 +12,49 @@ import androidx.compose.ui.Modifier
 import com.example.coffe_log.components.BarBottom
 
 
+//@Composable
+//fun LogEventsScreen(
+//    onAClicked: () -> Unit,
+//    onBClicked: () -> Unit,
+//    onCClicked: () -> Unit,
+//    onDClicked: () -> Unit,
+//    modifier: Modifier = Modifier
+//) {
+//
+//    Scaffold(
+//        bottomBar = {
+//            BarBottom(
+//                onAClicked = onAClicked,
+//                onBClicked = onBClicked,
+//                onCClicked = onCClicked,
+//                onDClicked = onDClicked
+//            )
+//        }
+//    ) {
+//        Column(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .padding(it)
+//        ) {
+//            Column {
+//                Text(text = "LogEventsScreen")
+//                Button(
+//                    onClick = onAClicked
+//                ) {
+//                    Text(text = "Log Events")
+//                }
+//            }
+//        }
+//    }
+//}
 @Composable
-fun LogEventsScreen(
-    onAClicked: () -> Unit,
-    onBClicked: () -> Unit,
-    onCClicked: () -> Unit,
-    onDClicked: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-
-    Scaffold(
-        bottomBar = {
-            BarBottom(
-                onAClicked = onAClicked,
-                onBClicked = onBClicked,
-                onCClicked = onCClicked,
-                onDClicked = onDClicked
-            )
-        }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
+fun LogEventsScreen() {
+    Column {
+        Text(text = "LogEventsScreen")
+        Button(
+            onClick = {}
         ) {
-            Column {
-                Text(text = "LogEventsScreen")
-                Button(
-                    onClick = onAClicked
-                ) {
-                    Text(text = "Log Events")
-                }
-            }
+            Text(text = "Log Events")
         }
     }
 }
