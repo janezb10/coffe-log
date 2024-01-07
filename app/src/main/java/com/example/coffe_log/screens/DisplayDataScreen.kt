@@ -50,9 +50,14 @@ import com.example.coffe_log.components.BarBottom
 //}
 
 @Composable
-fun DisplayDataScreen() {
+fun DisplayDataScreen(
+    logs: List<Int>,
+    modifier: Modifier = Modifier
+) {
     Column {
         Text(text = "DisplayDataScreen")
-
+        logs.forEach {
+            Text(text = "Log: $it")
+        }
     }
 }

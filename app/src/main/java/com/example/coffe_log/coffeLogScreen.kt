@@ -1,15 +1,12 @@
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,7 +14,6 @@ import com.example.coffe_log.components.BarBottom
 import com.example.coffe_log.screens.DisplayDataScreen
 import com.example.coffe_log.screens.LogEventsScreen
 import com.example.coffe_log.screens.MotivationMessagesScreen
-import com.example.coffe_log.screens.SettingsScreen
 import com.example.coffe_log.screens.SettingsScreen
 import com.example.coffe_log.screens.StartScreen
 import com.example.coffe_log.ui.theme.CoffeViewModel
@@ -34,7 +30,7 @@ enum class CoffeLogScreen {
 fun CoffeLogApp(
     modifier: Modifier = Modifier
 ) {
-    var count = rememberSaveable{ mutableStateOf(0) }
+    val count = rememberSaveable{ mutableIntStateOf(0)}
     val viewModel: CoffeViewModel = viewModel()
 
     val navController = rememberNavController()
@@ -92,7 +88,9 @@ fun CoffeLogApp(
                     navController.navigate(CoffeLogScreen.Settings.name)
                 },
                 content = {
-                    DisplayDataScreen()
+                    DisplayDataScreen(
+                        logs = viewModel.getLogs()
+                    )
                 }
             )
         }
