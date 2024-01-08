@@ -62,14 +62,11 @@ fun CoffeLogApp(
                 },
                 content = {
                     LogEventsScreen(
-                        countt = countt.value,
+                        countt = countt.intValue,
                         onLog = {
-                            countt.value = countt.value + 1
+                            countt.intValue = countt.intValue + 1
                         },
                         vm = viewModel,
-//                        count = viewModel.countNumber(),
-//                        yesterdayUsage = viewModel.yesterdayUsage(),
-//                        totalUsage = viewModel.totalUsage(),
                     )
                 }
             )

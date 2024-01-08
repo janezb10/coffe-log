@@ -4,29 +4,27 @@ package com.example.coffe_log.screens
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.coffe_log.components.BarBottom
 import com.example.coffe_log.ui.theme.CoffeViewModel
 
 
@@ -39,12 +37,14 @@ fun LogEventsScreen(
 ) {
     val adittionalMessage = remember { mutableStateOf("") }
 
+    val focusManager = LocalFocusManager.current
+
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
 //            ADITIONAL MESSAGES
-            TextField(
+            OutlinedTextField(
                 value = adittionalMessage.value,
                 onValueChange = { newText -> adittionalMessage.value = newText },
                 label = { Text("Aditional Message") },
@@ -52,10 +52,15 @@ fun LogEventsScreen(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Done
                 ),
-                modifier = Modifier.padding(bottom = 10.dp)
+                modifier = Modifier
+                    .padding(bottom = 15.dp, start = 20.dp, end = 20.dp)
+                    .fillMaxWidth()
             )
             Button(
                 onClick = {
+                    focusManager.clearFocus()
+
+
                     vm.onLog(adittionalMessage.value)
                     adittionalMessage.value = ""
 //                  onLog() for refresing the screen lol

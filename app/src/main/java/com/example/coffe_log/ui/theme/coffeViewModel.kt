@@ -8,7 +8,6 @@ import java.time.LocalDateTime
 
 
 data class CoffeUiState(
-//    var count: Int = 0,
     var coffeLogs: MutableList<LocalDateTime> = mutableListOf(),
     var coffeLogsAndMessagePair: MutableList<Pair<LocalDateTime, String>> = mutableListOf(),
 )
@@ -19,37 +18,17 @@ class CoffeViewModel : ViewModel() {
     val uiState: StateFlow<CoffeUiState> = _uiState.asStateFlow()
 
     fun onLog(aditionalMessage: String = "") {
-//        _uiState.value = _uiState.value.copy(
-//            count = _uiState.value.count + 1
-//        )
         _uiState.value.coffeLogs.add(LocalDateTime.now())
-
         _uiState.value.coffeLogsAndMessagePair.add(Pair(LocalDateTime.now(), aditionalMessage))
     }
 
-    fun countNumber(): Int {
-        return _uiState.value.coffeLogs.size
-    }
 
     fun getLogs(): MutableList<Pair<LocalDateTime, String>> {
-//        var a = _uiState.value.coffeLogs
-//        var b = mutableListOf<String>()
-//        for (i in a) {
-//            b.add(i.toString())
-//        }
-//        return b
-
-//        var a = _uiState.value.coffeLogsAndMessagePair
-//        var b = mutableListOf<Pair<String, String>>()
-//        for (i in a) {
-//            b.add(Pair(i.first.toString(), i.second))
-//        }
-//        return b
         return _uiState.value.coffeLogsAndMessagePair
     }
 
     fun todayUsage(): Int {
-        var a = _uiState.value.coffeLogs
+        val a = _uiState.value.coffeLogs
         var b = 0
         for (i in a) {
             if (i.dayOfYear == LocalDateTime.now().dayOfYear) {
@@ -60,7 +39,7 @@ class CoffeViewModel : ViewModel() {
     }
 
     fun yesterdayUsage(): Int {
-        var a = _uiState.value.coffeLogs
+        val a = _uiState.value.coffeLogs
         var b = 0
         for (i in a) {
             if (i.dayOfYear == LocalDateTime.now().dayOfYear - 1) {
@@ -71,7 +50,7 @@ class CoffeViewModel : ViewModel() {
     }
 
     fun weekUsage(): Int {
-        var a = _uiState.value.coffeLogs
+        val a = _uiState.value.coffeLogs
         var b = 0
         for (i in a) {
             if (i.dayOfYear >= LocalDateTime.now().dayOfYear - 7) {
@@ -82,7 +61,7 @@ class CoffeViewModel : ViewModel() {
     }
 
     fun monthUsage(): Int {
-        var a = _uiState.value.coffeLogs
+        val a = _uiState.value.coffeLogs
         var b = 0
         for (i in a) {
             if (i.dayOfYear >= LocalDateTime.now().dayOfYear - 30) {
@@ -101,19 +80,18 @@ class CoffeViewModel : ViewModel() {
     }
 
 
-//BUG: minute se po uri odštevjo al po pou uri nwm
     fun timeSinceLastUsage(): String {
-        var a = _uiState.value.coffeLogs
+        val a = _uiState.value.coffeLogs
         if (a.isEmpty()) {
             return "No usage yet"
         }
-        var b:LocalDateTime = a[a.size - 1]
+        val b:LocalDateTime = a[a.size - 1]
         var c = LocalDateTime.now()
         c = c.minusHours(b.hour.toLong())
         c = c.minusMinutes(b.minute.toLong())
 //        c = c.minusSeconds(b.second.toLong())
-        var d = c.hour
-        var e = c.minute
+        val d = c.hour
+        val e = c.minute
 //        var h = c.second
         var f = "hours"
         if (d == 1) {
