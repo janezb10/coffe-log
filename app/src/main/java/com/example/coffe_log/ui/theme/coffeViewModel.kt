@@ -104,4 +104,8 @@ class CoffeViewModel : ViewModel() {
         return "$d $f and $e $g ago"
     }
 
+    fun deleteData(): Unit {
+        _uiState.value = CoffeUiState()
+    }
+
 }

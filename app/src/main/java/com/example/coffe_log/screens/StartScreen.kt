@@ -15,10 +15,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 @Composable
@@ -66,9 +68,17 @@ fun StartScreen(
             Button(
                 onClick = {
                     login(onLoginClicked, usernameInput.value, passwordInput.value)
-                }
+                },
+                modifier = Modifier.padding(top = 15.dp)
             ) {
-                Text(text = "Go to second screen")
+                Text(
+                    text = "Login",
+                    modifier = Modifier.padding(8.dp),
+                    style = TextStyle(
+                        fontSize = 25.sp,
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                    )
+                )
             }
         }
     }

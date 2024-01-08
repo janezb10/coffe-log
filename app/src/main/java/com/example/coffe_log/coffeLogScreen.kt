@@ -126,7 +126,13 @@ fun CoffeLogApp(
                     navController.navigate(CoffeLogScreen.Settings.name)
                 },
                 content = {
-                    SettingsScreen()
+                    SettingsScreen(
+                        vm = viewModel,
+                        onClickLogout = {
+                            navController.navigate(CoffeLogScreen.Start.name)
+                        },
+                        modifier = modifier
+                    )
                 }
             )
         }
