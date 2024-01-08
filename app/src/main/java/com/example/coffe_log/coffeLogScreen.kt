@@ -30,10 +30,10 @@ enum class CoffeLogScreen {
 fun CoffeLogApp(
     modifier: Modifier = Modifier
 ) {
-    val count = rememberSaveable{ mutableIntStateOf(0)}
     val viewModel: CoffeViewModel = viewModel()
 
     val navController = rememberNavController()
+    val countt = rememberSaveable { mutableIntStateOf(0) }
 
     NavHost(
         navController = navController,
@@ -62,13 +62,14 @@ fun CoffeLogApp(
                 },
                 content = {
                     LogEventsScreen(
+                        countt = countt.value,
                         onLog = {
-                            count.value = count.value + 1
-                            viewModel.onLog()
+                            countt.value = countt.value + 1
                         },
-                        count = count.value,
-                        ccount = viewModel.countNumber()
-//                        ccount = viewModel.uiState.value.count
+                        vm = viewModel,
+//                        count = viewModel.countNumber(),
+//                        yesterdayUsage = viewModel.yesterdayUsage(),
+//                        totalUsage = viewModel.totalUsage(),
                     )
                 }
             )
@@ -89,7 +90,7 @@ fun CoffeLogApp(
                 },
                 content = {
                     DisplayDataScreen(
-                        logs = viewModel.getLogs()
+                        vm = viewModel
                     )
                 }
             )
