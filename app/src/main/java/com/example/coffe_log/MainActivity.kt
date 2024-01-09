@@ -19,15 +19,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CoffelogTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.background else com.example.coffe_log.ui.theme.Custom1
                 ) {
-//                    od
-//                    Greeting("Android")
                     CoffeLogApp()
-//                    do
                 }
             }
         }

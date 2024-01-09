@@ -29,45 +29,23 @@ class CoffeViewModel : ViewModel() {
 
     fun todayUsage(): Int {
         val a = _uiState.value.coffeLogs
-        var b = 0
-        for (i in a) {
-            if (i.dayOfYear == LocalDateTime.now().dayOfYear) {
-                b += 1
-            }
-        }
-        return b
+        return a.filter { it.dayOfYear == LocalDateTime.now().dayOfYear }.size
     }
 
     fun yesterdayUsage(): Int {
         val a = _uiState.value.coffeLogs
-        var b = 0
-        for (i in a) {
-            if (i.dayOfYear == LocalDateTime.now().dayOfYear - 1) {
-                b += 1
-            }
-        }
-        return b
+        return a.filter { it.dayOfYear == LocalDateTime.now().dayOfYear - 1 }.size
     }
 
     fun weekUsage(): Int {
         val a = _uiState.value.coffeLogs
-        var b = 0
-        for (i in a) {
-            if (i.dayOfYear >= LocalDateTime.now().dayOfYear - 7) {
-                b += 1
-            }
-        }
-        return b
+        return a.filter { it.dayOfYear >= LocalDateTime.now().dayOfYear - 7 }.size
     }
+
 
     fun monthUsage(): Int {
         val a = _uiState.value.coffeLogs
-        var b = 0
-        for (i in a) {
-            if (i.dayOfYear >= LocalDateTime.now().dayOfYear - 30) {
-                b += 1
-            }
-        }
+        val b = a.filter { it.dayOfYear >= LocalDateTime.now().dayOfYear - 30 }.size
         return b
     }
 
