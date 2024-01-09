@@ -1,6 +1,7 @@
 package com.example.coffe_log.screens
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,9 +23,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.coffe_log.R
 import com.example.coffe_log.ui.theme.CoffeViewModel
 
 
@@ -70,10 +73,11 @@ fun LogEventsScreen(
                     .size(170.dp)
                     .clip(CircleShape)
             ) {
-                Icon(
-                    Icons.Filled.CheckCircle,
-                    contentDescription = "Cicon",
-                    Modifier.size(160.dp)
+                Image(
+                    painter = painterResource(id = R.drawable.logo),
+                    contentDescription = "Logo",
+                    modifier = Modifier
+                        .size(160.dp)
                 )
             }
             Text(
