@@ -101,11 +101,13 @@ class CoffeViewModel : ViewModel() {
         _uiState.value = CoffeUiState()
     }
 
-    private fun getQuotess() {
+    fun getQuotess() {
         viewModelScope.launch {
             quotesUiState = try {
                 val listResult = QuotesApi.retrofitService.getQuotes()
-                QuoteUiState.Success(listResult)
+                QuoteUiState.Success(
+                    "Success: ${listResult.size} Quotes retrieved"
+                )
             } catch (e: IOException) {
                 QuoteUiState.Error
             }
