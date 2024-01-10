@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.coffe_log.network.Quote
 import com.example.coffe_log.network.QuotesApi
+import com.example.coffe_log.screens.ResultScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +17,7 @@ import java.time.LocalDateTime
 
 
 sealed interface QuoteUiState {
-    data class Success(val quotes: String) : QuoteUiState
+    data class Success(val quotes: List<Quote>) : QuoteUiState
     object Error : QuoteUiState
     object Loading : QuoteUiState
 }
@@ -106,13 +108,15 @@ class CoffeViewModel : ViewModel() {
             quotesUiState = try {
                 val listResult = QuotesApi.retrofitService.getQuotes()
                 QuoteUiState.Success(
-                    "Success: ${listResult.size} Quotes retrieved"
+                    listResult
+//                    "Success: ${listResult.size} Quotes retrieved"
                 )
             } catch (e: IOException) {
                 QuoteUiState.Error
             }
         }
     }
+
 
     init {
         getQuotess()
