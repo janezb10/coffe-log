@@ -17,12 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 
-// A 2. zaslon: beleženje dogodkov -
-// B 3. zaslon: Prikaz dogodkov -
-// C 4. zaslon: Prikaz motivacijskih sporočil -
-// D 5. zaslon: nastavitve -
-//  1. zaslon: prijava v aplikacijo -
-
 @Composable
 fun BarBottom(
     onAClicked: () -> Unit,

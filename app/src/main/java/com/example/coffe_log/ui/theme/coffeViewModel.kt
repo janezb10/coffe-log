@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffe_log.network.Quote
 import com.example.coffe_log.network.QuotesApi
-import com.example.coffe_log.screens.ResultScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -74,6 +73,9 @@ class CoffeViewModel : ViewModel() {
         return _uiState.value.coffeLogs.takeLast(10)
     }
 
+    fun wasThereAUsage(): Boolean {
+        return _uiState.value.coffeLogs.isNotEmpty()
+    }
 
     fun timeSinceLastUsage(): String {
         val a = _uiState.value.coffeLogs
@@ -109,7 +111,6 @@ class CoffeViewModel : ViewModel() {
                 val listResult = QuotesApi.retrofitService.getQuotes()
                 QuoteUiState.Success(
                     listResult
-//                    "Success: ${listResult.size} Quotes retrieved"
                 )
             } catch (e: IOException) {
                 QuoteUiState.Error
