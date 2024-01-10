@@ -10,8 +10,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.time.LocalDateTime
 
+
+sealed interface QuoteUiState {
+    data class Success(val quotes: String) : QuoteUiState
+    object Error : QuoteUiState
+    object Loading : QuoteUiState
+}
 
 data class CoffeUiState(
     var coffeLogs: MutableList<LocalDateTime> = mutableListOf(),
@@ -19,7 +26,7 @@ data class CoffeUiState(
 )
 
 class CoffeViewModel : ViewModel() {
-    var quotesUiState: String by mutableStateOf("")
+    var quotesUiState: QuoteUiState by mutableStateOf(QuoteUiState.Loading)
         private set
 
     private val _uiState = MutableStateFlow(CoffeUiState())
@@ -96,8 +103,12 @@ class CoffeViewModel : ViewModel() {
 
     private fun getQuotess() {
         viewModelScope.launch {
-            val listResult = QuotesApi.retrofitService.getQuotes()
-            quotesUiState = listResult
+            quotesUiState = try {
+                val listResult = QuotesApi.retrofitService.getQuotes()
+                QuoteUiState.Success(listResult)
+            } catch (e: IOException) {
+                QuoteUiState.Error
+            }
         }
     }
 

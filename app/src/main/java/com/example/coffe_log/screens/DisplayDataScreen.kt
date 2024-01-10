@@ -27,9 +27,7 @@ fun DisplayDataScreen(
         Text(text = "Total: ${vm.totalUsage()}")
     }
     LazyColumn {
-//        items(vm.getLogs().size) {
-//            Text(text = "Log: ${vm.getLogs()[it]}")
-//        }
+//        items = Higher order function
         items (vm.getLogs().size) {
             val time = vm.getLogs()[it].first
             val message = vm.getLogs()[it].second
