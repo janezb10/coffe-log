@@ -1,9 +1,15 @@
 package com.example.coffe_log.ui.theme
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.coffe_log.network.QuotesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
 
@@ -13,6 +19,9 @@ data class CoffeUiState(
 )
 
 class CoffeViewModel : ViewModel() {
+
+    var QuotesUiState: String by mutableStateOf("")
+        private set
 
     private val _uiState = MutableStateFlow(CoffeUiState())
     val uiState: StateFlow<CoffeUiState> = _uiState.asStateFlow()
@@ -85,5 +94,18 @@ class CoffeViewModel : ViewModel() {
     fun deleteData(): Unit {
         _uiState.value = CoffeUiState()
     }
+
+    init {
+        getQuotes()
+    }
+    private fun getQuotes() {
+        viewModelScope.launch {
+            val listResult = QuotesApi.retrofitService.getQuotes()
+            QuotesUiState = listResult
+
+        }
+
+    }
+
 
 }
