@@ -107,7 +107,10 @@ fun CoffeLogApp(
                     navController.navigate(CoffeLogScreen.Settings.name)
                 },
                 content = {
-                    MotivationMessagesScreen()
+                    MotivationMessagesScreen(
+                        vm = viewModel,
+                        modifier = modifier
+                    )
                 }
             )
         }

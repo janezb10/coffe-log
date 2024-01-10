@@ -15,12 +15,11 @@ import java.time.LocalDateTime
 
 data class CoffeUiState(
     var coffeLogs: MutableList<LocalDateTime> = mutableListOf(),
-    var coffeLogsAndMessagePair: MutableList<Pair<LocalDateTime, String>> = mutableListOf(),
+    var coffeLogsAndMessagePair: MutableList<Pair<LocalDateTime, String>> = mutableListOf()
 )
 
 class CoffeViewModel : ViewModel() {
-
-    var QuotesUiState: String by mutableStateOf("")
+    var quotesUiState: String by mutableStateOf("")
         private set
 
     private val _uiState = MutableStateFlow(CoffeUiState())
@@ -95,16 +94,15 @@ class CoffeViewModel : ViewModel() {
         _uiState.value = CoffeUiState()
     }
 
-    init {
-        getQuotes()
-    }
-    private fun getQuotes() {
+    private fun getQuotess() {
         viewModelScope.launch {
             val listResult = QuotesApi.retrofitService.getQuotes()
-            QuotesUiState = listResult
-
+            quotesUiState = listResult
         }
+    }
 
+    init {
+        getQuotess()
     }
 
 
