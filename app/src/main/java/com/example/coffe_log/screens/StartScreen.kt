@@ -102,7 +102,6 @@ private fun login(
     if (usernameI == username && passwordI == password) {
         onLoginDemanded()
     }
-    onLoginDemanded()
 }
 
 @Preview
