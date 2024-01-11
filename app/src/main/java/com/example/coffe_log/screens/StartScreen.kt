@@ -22,6 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffe_log.R
@@ -96,11 +97,16 @@ private fun login(
     usernameI: String,
     passwordI: String
 ) {
-//    todo: uncomment this
-//    val username = "user"
-//    val password = "pass"
-//    if (usernameI == username && passwordI == password) {
-//        onLoginDemanded()
-//    }
+    val username = "user"
+    val password = "pass"
+    if (usernameI == username && passwordI == password) {
+        onLoginDemanded()
+    }
     onLoginDemanded()
+}
+
+@Preview
+@Composable
+fun StartScreenPreview() {
+    StartScreen(onLoginClicked = {})
 }

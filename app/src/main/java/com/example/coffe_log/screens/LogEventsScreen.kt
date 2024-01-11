@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coffe_log.R
 import com.example.coffe_log.ui.theme.CoffeViewModel
@@ -90,4 +91,10 @@ fun LogEventsScreen(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun LogEventsScreenPreview() {
+    LogEventsScreen(onLog = {}, vm = CoffeViewModel(), countt = 0)
 }

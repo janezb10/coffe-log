@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.coffe_log.network.Quote
 
@@ -99,12 +100,18 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier) {
-        Text(text = "Loading")
-        Image(
-            modifier = modifier.size(200.dp),
-            painter = painterResource(R.drawable.loading_img),
-            contentDescription = "Loading"
-        )
+        Column(
+            modifier = modifier,
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.loading_img),
+                contentDescription = "Loading",
+                modifier = modifier.size(500.dp)
+            )
+            Text(text = "Loading", modifier = Modifier)
+        }
     }
 }
 
@@ -127,4 +134,9 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
     }
 }
 
+@Preview
+@Composable
+fun MotivationMessagesScreenPreview() {
+    MotivationMessagesScreen(vm = CoffeViewModel())
+}
 

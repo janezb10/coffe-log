@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffe_log.ui.theme.CoffeViewModel
@@ -77,5 +78,10 @@ fun SettingsScreen(
 
         }
     }
+}
 
+@Preview
+@Composable
+fun SettingsScreenPreview() {
+    SettingsScreen(vm = CoffeViewModel(), onClickLogout = {})
 }
