@@ -60,7 +60,7 @@ fun StartScreen(
             TextField(
                 value = passwordInput.value,
                 onValueChange = { newText -> passwordInput.value = newText },
-                label = { Text("Password") },
+                label = { Text("Password ") },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Done
